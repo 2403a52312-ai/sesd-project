@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}History | JobGuard AI{% endblock %}
+{% block content %}
+<section class="page-heading compact"><span class="eyebrow">YOUR RECORDS</span><h1>Analysis history</h1><p>Previously checked job and internship descriptions.</p></section>
+<div class="content-card">
+{% if rows %}<div class="table-wrap"><table><thead><tr><th>Date</th><th>Prediction</th><th>Risk score</th><th>Submitted text</th></tr></thead><tbody>{% for row in rows %}<tr><td>{{ row.created_at }}</td><td>{{ row.result }}</td><td>{{ '%.2f'|format(row.risk_score) }}%</td><td>{{ row.job_text[:100] }}{% if row.job_text|length > 100 %}...{% endif %}</td></tr>{% endfor %}</tbody></table></div>{% else %}<p class="empty">You have not analysed any postings yet.</p><a class="btn btn-primary" href="{{ url_for('analyze') }}">Check your first job</a>{% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}About | JobGuard AI{% endblock %}
+{% block content %}
+<section class="page-heading"><span class="eyebrow">ABOUT THE PROJECT</span><h1>Helping job seekers spot warning signs.</h1><p>JobGuard AI is an academic project that applies Natural Language Processing and Machine Learning to text-based job-posting analysis.</p></section>
+<div class="content-card">
+  <h2>How it works</h2>
+  <div class="steps">
+    <div><b>01</b><h3>Enter the posting</h3><p>Paste the job or internship description into the checker.</p></div>
+    <div><b>02</b><h3>Process the text</h3><p>TF-IDF converts the text into numerical features for the model.</p></div>
+    <div><b>03</b><h3>Predict and review</h3><p>The trained classifier estimates the likelihood of a fraudulent label and displays warning indicators.</p></div>
+  </div>
+</div>
+<div class="notice"><strong>Important:</strong> This tool cannot independently verify a company, recruiter, website or job offer. Always check the employer's official website and contact details. Never pay a fee to obtain a job.</div>
+{% endblock %}

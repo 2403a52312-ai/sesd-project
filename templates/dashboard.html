@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | JobGuard AI{% endblock %}
+{% block content %}
+<section class="dashboard-head"><div><span class="eyebrow">YOUR WORKSPACE</span><h1>Hello, {{ session.get('user_name', 'there') }} 👋</h1><p>Ready to check your next opportunity?</p></div><a class="btn btn-primary" href="{{ url_for('analyze') }}">＋ Analyse a job</a></section>
+{% if not model_ready %}<div class="notice warning"><strong>Model not found.</strong> Add the dataset to the data folder and run <code>python train_model.py</code> in your VS Code terminal.</div>{% endif %}
+<div class="stats-grid"><div class="stat-card"><span>Total analyses</span><strong>{{ total }}</strong><small>All your scans</small></div><div class="stat-card"><span>Model status</span><strong class="status-text">{{ 'Ready' if model_ready else 'Not trained' }}</strong><small>Machine-learning model</small></div></div>
+<div class="content-card"><div class="card-heading"><div><h2>Recent analyses</h2><p class="muted">Your latest job-posting checks.</p></div><a href="{{ url_for('history') }}">View all →</a></div>
+{% if recent %}<div class="table-wrap"><table><thead><tr><th>Date</th><th>Prediction</th><th>Risk score</th></tr></thead><tbody>{% for row in recent %}<tr><td>{{ row.created_at }}</td><td>{{ row.result }}</td><td>{{ '%.2f'|format(row.risk_score) }}%</td></tr>{% endfor %}</tbody></table></div>{% else %}<p class="empty">No scans yet. Select “Analyse a job” to get started.</p>{% endif %}</div>
+{% endblock %}

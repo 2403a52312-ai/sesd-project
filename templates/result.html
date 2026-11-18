@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Analysis Result | JobGuard AI{% endblock %}
+{% block content %}
+<section class="page-heading compact"><span class="eyebrow">ANALYSIS COMPLETE</span><h1>Your scan result</h1><p>Review the model estimate and any additional warning indicators.</p></section>
+<div class="result-card">
+  <div class="result-label {{ 'danger-text' if risk_score >= 50 else 'success-text' }}">{{ prediction }}</div>
+  <div class="risk-number">{{ risk_score }}<span>%</span></div>
+  <p class="muted">Estimated fraud risk from the machine-learning model</p>
+  <div class="risk-track"><div class="risk-fill {{ 'high' if risk_score >= 50 else 'low' }}" style="width: {{ risk_score }}%"></div></div>
+  <p class="risk-caption">This score is a model estimate, not a verified probability or guarantee.</p>
+  {% if flagged_terms %}
+  <div class="warning-list"><h3>Warning phrases found in the text</h3><div class="tag-list">{% for term in flagged_terms %}<span class="tag">{{ term }}</span>{% endfor %}</div><p>These phrases are reasons to investigate further; their presence alone does not prove fraud.</p></div>
+  {% else %}
+  <div class="safe-note">No phrases from the simple warning-word list were detected. This does not prove the posting is genuine.</div>
+  {% endif %}
+  <div class="result-actions"><a class="btn btn-primary" href="{{ url_for('analyze') }}">Analyse another →</a><a class="btn btn-light" href="{{ url_for('history') }}">View history</a></div>
+</div>
+<div class="notice"><strong>Stay safe:</strong> Verify the role on the company's official careers page. Be cautious of requests for registration fees, deposits, OTPs, bank details or identity documents through unofficial channels.</div>
+{% endblock %}

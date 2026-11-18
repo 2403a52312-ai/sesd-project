@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Analyse a Job | JobGuard AI{% endblock %}
+{% block content %}
+<section class="page-heading compact"><span class="eyebrow">AI JOB CHECKER</span><h1>Analyse a job or internship.</h1><p>Paste as much of the advertisement as possible for a more useful text-based estimate.</p></section>
+<form class="content-card analyze-form" method="POST">
+  <label for="job_text">Job / internship description</label>
+  <textarea id="job_text" name="job_text" rows="12" minlength="30" placeholder="Paste the job title, company details, description, requirements, salary, application instructions..." required>{{ job_text }}</textarea>
+  <div class="form-hint"><span id="charCount">0 characters</span><span>Do not include passwords or sensitive personal information.</span></div>
+  <button class="btn btn-primary" type="submit">Analyse with AI →</button>
+</form>
+<div class="notice"><strong>Tip:</strong> Include the role, company profile, responsibilities, requirements and application instructions if available. The model only analyses the text you provide.</div>
+{% endblock %}
